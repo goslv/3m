@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feliz 3 Meses ❤️</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #6e4257;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            position: relative;
+        }
+        h1 {
+            color: white;
+            font-size: 3em;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            white-space: nowrap; /* Evita que el texto se rompa en varias líneas */
+            animation: fadeInH1 2s forwards, moveToCarrusel 2s 2s forwards;
+            text-align: center;
+            z-index: 10;
+        }
+        @keyframes fadeInH1 {
+            from { opacity: 0; transform: translate(-50%, -50%) scale(1); }
+            to { opacity: 1; transform: translate(-50%, -50%) scale(1.2); }
+        }
+        @keyframes moveToCarrusel {
+            from { top: 50%; left: 50%; transform: translate(-50%, -50%) scale(1.2); }
+            to { top: 0; left: 50%; transform: translateX(-50%) scale(0.8); }
+        }
+        #carrusel {
+            position: relative;
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+            background-color: rgb(134, 75, 93);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            opacity: 0;
+            animation: fadeInCarrusel 2s 2s forwards;
+            overflow: hidden;
+        }
+        @keyframes fadeInCarrusel {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .foto {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+        }
+        .foto.active {
+            display: flex;
+        }
+        .foto img {
+            width: 100%;
+            height: auto;
+            max-height: 400px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+        .foto h2 {
+            font-size: 1em;
+            color: #f5527b;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 1);
+        }
+        .boton {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0);
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            padding: 10px;
+            color: white;
+            border-radius: 10%;
+        }
+        .boton:hover {
+            background: rgba(0, 0, 0, 0.7);
+        }
+        .boton:disabled {
+            opacity: 0.3;
+        }
+        .prev { left: 5px; } 
+        .next { right: 5px; } 
+
+        /* Responsivo */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2em;
+            }
+            .foto h2 {
+                font-size: 0.9em;
+            }
+            .boton {
+                font-size: 16px;
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Feliz 3 meses juntos ❤️</h1>
+    <div id="carrusel">
+        <button class="boton prev" onclick="cambiarFoto(-1)" id="btnPrev" disabled>&#10094;</button>
+        <section class="foto active">
+            <h2>Primera cita (muriendo de los nervios jsjsjs)</h2>
+            <img src="./fotitos/1date.jpg">
+        </section>
+        <section class="foto">
+            <h2>Soy feliz de estar a tu lado y poder ser quien soy❤️</h2>
+            <img src="./fotitos/2date.jpg">
+        </section>
+        <section class="foto">
+            <h2>Espero siempre poder reposar en tu regazo 🥹</h2>
+            <img src="./fotitos/2date1.jpg">
+        </section>
+        <section class="foto">
+            <h2>Una de mis fotitos favoritas uwu</h2>
+            <img src="./fotitos/2date2.jpg">
+        </section>
+        <section class="foto">
+            <h2>Juntitos, siempre ❤️🥹</h2>
+            <img src="./fotitos/rings.jpg">
+        </section>
+        <button class="boton next" onclick="cambiarFoto(1)" id="btnNext">&#10095;</button>
+    </div>
+    <script>
+        let index = 0;
+        function cambiarFoto(dir) {
+            let fotos = document.querySelectorAll('.foto');
+            let btnPrev = document.getElementById('btnPrev');
+            let btnNext = document.getElementById('btnNext');
+
+            fotos[index].classList.remove('active');
+            index += dir;
+            fotos[index].classList.add('active');
+
+            btnPrev.disabled = (index === 0);
+            btnNext.disabled = (index === fotos.length - 1);
+        }
+    </script>
+</body>
+</html>
